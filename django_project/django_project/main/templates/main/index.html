@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta taags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale = 1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+    <meta charset="UTF-8">
+    <title>Spell Checker</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Spell Checker</h2>
+
+        <form method="post" action="{% url 'main:spellcheck' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="input_text">Enter text:</label>
+                <textarea class="form-control" id="input_text" name="input_text" rows="12"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Check Spelling</button>
+            <!-- onclick="checkSpelling()" -->
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function checkSpelling() {
+            // 여기에 폼 데이터를 서버로 전송하는 코드 작성
+
+            // 페이지 이동
+            window.location.href = '/result/';
+        }
+    </script>
+</body>
+
+</html>

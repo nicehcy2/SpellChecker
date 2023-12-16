@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta taags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale = 1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+    <meta charset="UTF-8">
+    <title>Spell Checker</title>
+
+    <style>
+        .readonly-textarea {
+            background-color: #f8f9fa;
+            color: #495057;
+            resize: none;
+        }
+        textarea {
+            resize: none;
+        }
+        body {
+            font-family: 'YourDefaultFont', sans-serif; /* 기본 글꼴 */
+        }
+
+        .special-text {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="special-text mb-4">Spell Checker</h2>
+
+        <form method="post" action="{% url 'main:spellcheck' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="input_text" class="special-text">Enter text: (300자 이하의 입력을 권장하며, 서버 상태에 따라 작동하지 않을 수 있습니다.)</label>
+                <textarea class="form-control" id="input_text" name="input_text" rows="12" oninput="countCharacters()"></textarea>
+                <p id="charCount" class="mt-2" class="special-text">글자수: 0</p>
+            </div>
+            <button type="submit" class="btn btn-primary">Check Spelling</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function countCharacters() {
+            var text = document.getElementById("input_text").value;
+            var charCount = text.length;
+            document.getElementById("charCount").innerHTML = "Character count: " + charCount;
+        }
+    </script>
+</body>
+
+</html>
